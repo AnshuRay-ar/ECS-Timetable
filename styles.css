@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  color-scheme: light;
+  --primary: #6750A4;
+  --on-primary: #FFFFFF;
+  --surface: #FFFFFF;
+  --on-surface: #1C1B1F;
+  --outline: #D4D0DC;
+  --background: #F4F2F8;
+  --muted: #6F6A78;
+  --error: #B3261E;
+  --table-head: #F0ECF8;
+  --shadow: 0 12px 38px rgba(37, 24, 64, .10);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #D0BCFF;
+  --on-primary: #381E72;
+  --surface: #201E24;
+  --on-surface: #E8E2EC;
+  --outline: #514B5A;
+  --background: #121116;
+  --muted: #B7AFBF;
+  --error: #F2B8B5;
+  --table-head: #302B38;
+  --shadow: 0 12px 38px rgba(0, 0, 0, .28);
+}
+
+* { box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 84px 18px 36px;
+  font-family: Roboto, Arial, sans-serif;
+  color: var(--on-surface);
+  background: radial-gradient(circle at top, rgba(103,80,164,.10), transparent 36%), var(--background);
+  transition: background-color .25s, color .25s;
+}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+.theme-toggle {
+  position: fixed;
+  z-index: 5;
+  top: 18px;
+  right: 18px;
+  padding: 10px 16px;
+  border: 1px solid var(--outline);
+  border-radius: 999px;
+  color: var(--on-surface);
+  background: var(--surface);
+  box-shadow: 0 3px 12px rgba(0,0,0,.06);
+}
+.theme-toggle:hover { border-color: var(--primary); }
+
+.container {
+  width: min(100%, 720px);
+  margin: 28px auto;
+  padding: clamp(22px, 5vw, 42px);
+  border: 1px solid rgba(128, 112, 150, .12);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  animation: rise .45s ease both;
+}
+.page-header { text-align: center; margin-bottom: 30px; }
+.eyebrow {
+  margin: 0 0 9px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+h1 { margin: 0; color: var(--primary); font-size: clamp(27px, 5vw, 34px); }
+.subtitle { margin: 10px 0 0; color: var(--muted); line-height: 1.5; }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+.field { min-width: 0; }
+.field label {
+  display: block;
+  margin: 0 0 8px 3px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+input, select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--outline);
+  border-radius: 13px;
+  outline: none;
+  color: var(--on-surface);
+  background: var(--surface);
+}
+input:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(103,80,164,.15);
+}
+.submit-button {
+  min-height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 13px;
+  color: var(--on-primary);
+  background: var(--primary);
+  font-weight: 700;
+  transition: transform .2s, box-shadow .2s;
+}
+.submit-button:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(103,80,164,.22); }
+
+#result { margin-top: 28px; }
+.result-heading { margin: 0 0 14px; font-size: 18px; line-height: 1.5; }
+.roll { color: var(--primary); }
+.day { color: #D05B55; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--outline); border-radius: 14px; }
+table { width: 100%; border-collapse: collapse; min-width: 280px; }
+th, td { padding: 13px 15px; text-align: left; border-bottom: 1px solid var(--outline); }
+th { color: var(--primary); background: var(--table-head); font-size: 13px; }
+td { background: var(--surface); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { white-space: nowrap; font-weight: 500; }
+.empty-state, .error, .info {
+  padding: 14px 16px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+.empty-state, .info { color: var(--muted); background: var(--background); }
+.error { color: var(--error); background: color-mix(in srgb, var(--error) 9%, var(--surface)); }
+.week-details { margin-top: 22px; border-top: 1px solid var(--outline); padding-top: 16px; }
+.week-details summary { color: var(--primary); font-weight: 700; cursor: pointer; }
+.week-day { margin: 18px 0 8px; font-size: 15px; }
+.footer-note { margin: 26px 0 0; color: var(--muted); text-align: center; font-size: 12px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 640px) {
+  body { padding: 76px 12px 24px; }
+  .container { margin: 12px auto; border-radius: 22px; }
+  .form-row { grid-template-columns: 1fr; }
+  .submit-button { width: 100%; }
+  .theme-toggle { top: 12px; right: 12px; }
+}
